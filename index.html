@@ -194,7 +194,8 @@ const filtersEl = document.getElementById("filters");
 const postsEl = document.getElementById("posts");
 
 function renderFilters(){
-  const opts = [["all","All"], ...Object.entries(STRANDS).filter(([k,v])=>!v.hide).map(([k,v])=>[k,v.name])];
+  const opts = [["all","All"], ...Object.entries(STRANDS).filter(([k,v])=>!v.hide && POSTS.some(p=>p.strand===k)).map(([k,v])=>[k,v.name])];
+  filtersEl.hidden = opts.length < 2;
   filtersEl.innerHTML = "";
   opts.forEach(([k,label])=>{
     const b = document.createElement("button");
