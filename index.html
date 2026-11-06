@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Unbearably Bourgeois: outfits, scent, skin and dinners for one. A journal by Samuel, new every Saturday.">
+<title>Unbearably Bourgeois</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Layout: magazine masthead centred over a single airy reading column; black and white with a single hairline of oxblood */
+:root{
+  --paper:#ffffff; --ink:#0d0d0d; --muted:#6b6b6b; --rule:#e2e2e2; --accent:#7a2328; --card:#fafafa;
+  --display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body:"Jost", "Futura", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0e0e0e; --ink:#f2f2f2; --muted:#9a9a9a; --rule:#2a2a2a; --accent:#d48a90; --card:#151515; color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#0e0e0e; --ink:#f2f2f2; --muted:#9a9a9a; --rule:#2a2a2a; --accent:#d48a90; --card:#151515; color-scheme:dark}
+
+body{background:var(--paper); color:var(--ink); font-family:var(--body); font-weight:300; font-size:17px; line-height:1.75;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:640px; margin:0 auto; padding-block:56px 80px; display:flex; flex-direction:column; gap:56px}
+
+header{display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px; border-bottom:1px solid var(--ink); padding-bottom:26px}
+.byline,.meta,nav button,footer,.label .tag{font-family:var(--body); font-weight:500; font-size:11px; letter-spacing:.24em; text-transform:uppercase}
+.byline{color:var(--muted)}
+h1{font-family:var(--display); font-weight:400; font-size:clamp(40px, 10vw, 78px); line-height:1; margin:0; letter-spacing:-.015em; text-wrap:balance}
+h1 em{font-style:italic}
+.tagline{margin:0; color:var(--muted); max-width:42ch; font-size:15px}
+
+nav{display:flex; flex-wrap:wrap; justify-content:center; gap:4px 22px; margin-top:-28px}
+nav button{background:none; border:0; padding:6px 0; color:var(--muted); cursor:pointer; border-bottom:1px solid transparent}
+nav button:hover{color:var(--ink)}
+nav button[aria-pressed="true"]{color:var(--ink); border-bottom-color:var(--ink)}
+nav button:focus-visible{outline:1px solid var(--accent); outline-offset:3px}
+
+article{display:flex; flex-direction:column; gap:20px}
+.meta{display:flex; flex-wrap:wrap; gap:14px; color:var(--muted)}
+.meta .strand{color:var(--accent)}
+h2{font-family:var(--display); font-weight:400; font-size:clamp(32px, 6.5vw, 48px); line-height:1.08; margin:0 0 6px; text-wrap:balance}
+article p{margin:0; max-width:62ch}
+article > p:first-of-type::first-letter{font-family:var(--display); float:left; font-size:3.4em; line-height:.85; padding:6px 10px 0 0}
+.sign{font-family:var(--display); font-style:italic; font-size:24px}
+
+.strands{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); border-top:1px solid var(--rule)}
+.label{padding:18px 4px; border-bottom:1px solid var(--rule); display:flex; flex-direction:column; gap:4px; min-width:0}
+.label .tag{color:var(--accent); font-size:10px}
+.label strong{font-family:var(--display); font-weight:400; font-size:22px}
+.label span{color:var(--muted); font-size:15px; line-height:1.55}
+
+.next{font-family:var(--display); font-style:italic; color:var(--muted); font-size:19px}
+.empty{color:var(--muted); font-family:var(--display); font-style:italic; font-size:19px; text-align:center}
+footer{border-top:1px solid var(--rule); padding-top:22px; color:var(--muted); text-align:center; font-size:10px}
+</style>
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="byline">A journal by Samuel · New every Saturday</div>
+    <h1>Unbearably <em>Bourgeois</em></h1>
+    <p class="tagline">Single, late thirties, and taking getting dressed far too seriously.</p>
+  </header>
+
+  <nav aria-label="Filter posts" id="filters"></nav>
+
+  <main id="posts"></main>
+
+  <footer>© 2026 Samuel · New posts every Saturday</footer>
+</div>
+
+<script>
+const STRANDS = {
+  outfit:  {name:"Outfits", desc:"What I actually wore, why it worked, and the pieces I keep going back to."},
+  skin:    {name:"Skin & Grooming", desc:"What's on the bathroom shelf right now, and what's earned its place."},
+  scent:   {name:"Fragrance", desc:"The scent I'm wearing this week, and the mood it puts me in."},
+  wellness:{name:"Wellness", desc:"Moving, resting, and the small rituals that keep me sane."},
+  dinners: {name:"Dinners", desc:"The tables worth dressing for, and who I was sat across from."},
+  thoughts:{name:"Random Thoughts", desc:"A few things on my mind. Something I spotted, something I'm tempted by."}
+};
+
+const POSTS = [
+  {
+    id:"getting-dressed-again", strand:"thoughts", date:"6 November 2026",
+    title:"Can a man fall back in love with his wardrobe?",
+    body:[
+      "There's a particular kind of quiet that comes with being single in your late thirties. Not lonely, exactly. More like a flat with very good lighting and a wardrobe that has started to read like a list of exes: the coat I bought for someone else's taste, the shoes that were a phase, the jacket I'm still not over.",
+      "I used to write about what I wore. Then life got busy, as it does, and the clothes kept happening without the words. So I'm starting again, and this time I'm writing it all down: the outfits, the dates they did or didn't survive, the pieces I keep going back to like a bad habit.",
+      "Which got me thinking. Do we dress for the life we have, or for the one we're hoping walks through the door? Most mornings, I suspect it's a bit of both.",
+      "Expect outfits, what's on my bathroom shelf, the fragrance I'm wearing that week, dinners worth dressing for, far too many shoes and the occasional confession. A new entry every Saturday. Tell me yours too."
+    ],
+    showStrands:true,
+    next:"This Saturday: the first outfit, the scent, and the evening it was for."
+  }
+];
+
+let active = "all";
+const filtersEl = document.getElementById("filters");
+const postsEl = document.getElementById("posts");
+
+function renderFilters(){
+  const opts = [["all","All"], ...Object.entries(STRANDS).map(([k,v])=>[k,v.name])];
+  filtersEl.innerHTML = "";
+  opts.forEach(([k,label])=>{
+    const b = document.createElement("button");
+    b.type="button"; b.id="f-"+k; b.textContent=label;
+    b.setAttribute("aria-pressed", String(active===k));
+    b.addEventListener("click", ()=>{ active=k; renderFilters(); renderPosts(); });
+    filtersEl.appendChild(b);
+  });
+}
+
+function renderPosts(){
+  const list = POSTS.filter(p=>active==="all" || p.strand===active);
+  postsEl.innerHTML = "";
+  if(!list.length){
+    const p=document.createElement("p"); p.className="empty";
+    p.textContent = "Nothing under " + STRANDS[active].name + " yet. It's coming.";
+    postsEl.appendChild(p); return;
+  }
+  list.forEach(post=>{
+    const a = document.createElement("article"); a.id = post.id;
+    a.innerHTML = `<div class="meta"><span class="strand">${STRANDS[post.strand].name}</span><span>${post.date}</span></div><h2></h2>`;
+    a.querySelector("h2").textContent = post.title;
+    post.body.forEach(t=>{ const p=document.createElement("p"); p.textContent=t; a.appendChild(p); });
+    if(post.showStrands){
+      const intro=document.createElement("p"); intro.textContent="Here's roughly how it'll go:"; a.appendChild(intro);
+      const g=document.createElement("div"); g.className="strands";
+      Object.values(STRANDS).forEach(s=>{
+        const d=document.createElement("div"); d.className="label";
+        d.innerHTML=`<div class="tag">In the journal</div><strong></strong><span></span>`;
+        d.querySelector("strong").textContent=s.name; d.querySelector("span").textContent=s.desc;
+        g.appendChild(d);
+      });
+      a.appendChild(g);
+    }
+    const s=document.createElement("p"); s.className="sign"; s.textContent="x Samuel"; a.appendChild(s);
+    if(post.next){ const n=document.createElement("p"); n.className="next"; n.textContent=post.next; a.appendChild(n); }
+    postsEl.appendChild(a);
+  });
+}
+renderFilters(); renderPosts();
+</script>
+
+</body>
+</html>
