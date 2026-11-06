@@ -258,5 +258,22 @@ function renderPosts(){
 renderFilters(); renderPosts();
 </script>
 
+<script>
+(function(){
+  const sent=new Set();
+  function send(id,title){
+    if(sent.has(id)) return;
+    if(!(window.goatcounter && window.goatcounter.count)){ setTimeout(()=>send(id,title),1500); return; }
+    sent.add(id);
+    try{ window.goatcounter.count({path:"read-to-end/"+id, title:"Read to the end: "+title, event:true}); }catch(e){}
+  }
+  const io=("IntersectionObserver" in window) ? new IntersectionObserver(es=>{
+    es.forEach(en=>{ if(en.isIntersecting){ const a=en.target.closest("article"); if(a){ send(a.id, (a.querySelector("h2")||{}).textContent||a.id); } io.unobserve(en.target); } });
+  },{threshold:0.6}) : null;
+  function watch(){ if(!io) return; document.querySelectorAll("article .sign").forEach(el=>{ if(!el.dataset.w){ el.dataset.w=1; io.observe(el); } }); }
+  watch(); new MutationObserver(watch).observe(document.getElementById("posts"),{childList:true});
+})();
+</script>
+<script data-goatcounter="https://sahm.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
