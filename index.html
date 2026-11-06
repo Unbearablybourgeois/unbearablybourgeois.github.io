@@ -52,6 +52,11 @@ article > p:first-of-type::first-letter{font-family:var(--display); float:left; 
 .next{font-family:var(--display); font-style:italic; color:var(--muted); font-size:19px}
 .empty{color:var(--muted); font-family:var(--display); font-style:italic; font-size:19px; text-align:center}
 footer{border-top:1px solid var(--rule); padding-top:22px; color:var(--muted); text-align:center; font-size:10px}
+main{display:flex; flex-direction:column; gap:64px}
+article + article{border-top:1px solid var(--rule); padding-top:56px}
+figure{margin:8px 0; display:flex; flex-direction:column; gap:8px}
+figure img{width:100%; height:auto; display:block; background:var(--card)}
+figcaption{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
 </style>
 <style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -84,6 +89,28 @@ const STRANDS = {
 
 const POSTS = [
   {
+    id:"and-so-it-starts", strand:"thoughts", date:"7 November 2026",
+    title:"And so it starts",
+    body:[
+      "And so it starts.",
+      "Café Royal has put its Christmas on, and like any well-dressed guest, it arrived early and overdid it beautifully.",
+      "The tree in the lobby is taller than most of my ambitions and better dressed than most men in Mayfair. Red velvet bows, a lot of gold, and a little wooden train parked among the presents like a chauffeur waiting outside the Ritz.",
+      {img:"images/cafe-royal-tree.jpg", alt:"A towering Christmas tree with red velvet bows, gold lights and wrapped presents in the Café Royal lobby", caption:"Café Royal, London"},
+      "Under the chandelier, a waterfall of crystal that frankly deserves its own security detail, sits a table that looks like the North Pole's post room. Trees built entirely from envelopes, each one sealed in red wax. Frosted firs. A vintage red truck. Two glittering bears who have clearly never worked a day in their lives. I respect them enormously.",
+      "And in the middle, open for anyone to read: Santa's Naughty and Nice book.",
+      "Naturally, I checked. I'm on neither list. Either I'm being saved for something special, or I'm simply too interesting to categorise. I've decided it's both.",
+      {img:"images/cafe-royal-naughty-nice.jpg", alt:"Frosted mini trees, envelope trees sealed with red wax, a vintage red truck and an open Naughty and Nice book", caption:"The Naughty and Nice book"},
+      "Behind it all, the Santa's Workshop counter glows red, and everyone sitting at it already has a glass in hand. As it should be.",
+      {img:"images/cafe-royal-chandelier.jpg", alt:"A huge crystal chandelier above a festive table, with a red Santa's Workshop counter behind", caption:"Under the chandelier"},
+      "This is my favourite time of year to be unattached. The diary fills itself, every plus-one is my choice, and the best accessory at any party is a man who can leave exactly when he likes.",
+      "December rewards effort. Polish the shoes. Wear the good coat. Smell expensive. Arrive as if you meant to.",
+      "So here's my question for the season: why save the best version of yourself for a special occasion, when London in December <em>is</em> the occasion?",
+      "Consider this your invitation. Dress accordingly.",
+      "I hope you're doing something fun this weekend. Even the Grinch is considering cheerful."
+    ],
+    next:"Next Saturday: what I'm wearing to see the season in."
+  },
+  {
     id:"getting-dressed-again", strand:"thoughts", date:"6 November 2026",
     title:"Can a man fall back in love with his wardrobe?",
     body:[
@@ -92,8 +119,7 @@ const POSTS = [
       "Which got me thinking. Do we dress for the life we have, or for the one we're hoping walks through the door? Most mornings, I suspect it's a bit of both.",
       "Expect outfits, what's on my bathroom shelf, the fragrance I'm wearing that week, dinners worth dressing for, far too many shoes and the occasional confession. A new entry every Saturday. Tell me yours too."
     ],
-    showStrands:true,
-    next:"This Saturday: the first outfit, the scent, and the evening it was for."
+    showStrands:true
   }
 ];
 
@@ -125,7 +151,14 @@ function renderPosts(){
     const a = document.createElement("article"); a.id = post.id;
     a.innerHTML = `<div class="meta"><span class="strand">${STRANDS[post.strand].name}</span><span>${post.date}</span></div><h2></h2>`;
     a.querySelector("h2").textContent = post.title;
-    post.body.forEach(t=>{ const p=document.createElement("p"); p.textContent=t; a.appendChild(p); });
+    post.body.forEach(t=>{
+      if(typeof t === "string"){ const p=document.createElement("p"); p.innerHTML=t; a.appendChild(p); return; }
+      const f=document.createElement("figure");
+      const im=document.createElement("img"); im.src=t.img; im.alt=t.alt; im.loading="lazy"; im.width=1050; im.height=1400;
+      f.appendChild(im);
+      if(t.caption){ const c=document.createElement("figcaption"); c.textContent=t.caption; f.appendChild(c); }
+      a.appendChild(f);
+    });
     if(post.showStrands){
       const intro=document.createElement("p"); intro.textContent="Here's roughly how it'll go:"; a.appendChild(intro);
       const g=document.createElement("div"); g.className="strands";
