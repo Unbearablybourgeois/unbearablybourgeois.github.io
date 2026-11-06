@@ -6,7 +6,7 @@
 <meta name="description" content="Unbearably Bourgeois: outfits, scent, skin and dinners for one. A journal by Samuel, new every Saturday.">
 <title>Unbearably Bourgeois</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&family=Mrs+Saint+Delafield&display=swap">
 <style>
 /* Layout: magazine masthead centred over a single airy reading column; black and white with a single hairline of oxblood */
 :root{
@@ -41,7 +41,9 @@ article{display:flex; flex-direction:column; gap:20px}
 h2{font-family:var(--display); font-weight:400; font-size:clamp(32px, 6.5vw, 48px); line-height:1.08; margin:0 0 6px; text-wrap:balance}
 article p{margin:0; max-width:62ch}
 article > p:first-of-type::first-letter{font-family:var(--display); float:left; font-size:3.4em; line-height:.85; padding:6px 10px 0 0}
-.sign{font-family:var(--display); font-style:italic; font-size:24px}
+.sign{display:flex; flex-direction:column; align-items:flex-start; margin-top:16px; font-family:"Mrs Saint Delafield", "Snell Roundhand", "Brush Script MT", cursive; color:var(--ink); line-height:1; transform:rotate(-3deg); transform-origin:left center}
+.sign .yours{font-size:44px}
+.sign .sig{font-size:68px; margin:-6px 0 0 56px}
 
 .strands{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); border-top:1px solid var(--rule)}
 .label{padding:18px 4px; border-bottom:1px solid var(--rule); display:flex; flex-direction:column; gap:4px; min-width:0}
@@ -62,7 +64,7 @@ footer{border-top:1px solid var(--rule); padding-top:22px; color:var(--muted); t
   <header>
     <div class="byline">A journal by Samuel · New every Saturday</div>
     <h1>Unbearably <em>Bourgeois</em></h1>
-    <p class="tagline">Single, late thirties, and taking getting dressed far too seriously.</p>
+    <p class="tagline">Daydreamer, taking getting dressed far too seriously.</p>
   </header>
 
   <nav aria-label="Filter posts" id="filters"></nav>
@@ -87,8 +89,9 @@ const POSTS = [
     id:"getting-dressed-again", strand:"thoughts", date:"6 November 2026",
     title:"Can a man fall back in love with his wardrobe?",
     body:[
-      "There's a particular kind of quiet that comes with being single in your late thirties. Not lonely, exactly. More like a flat with very good lighting and a wardrobe that has started to read like a list of exes: the coat I bought for someone else's taste, the shoes that were a phase, the jacket I'm still not over.",
+      "There's a particular kind of quiet that comes with being single in your thirties. Not lonely, exactly. More like a flat with very good lighting and a wardrobe that has started to read like a list of exes: the coat I bought for someone else's taste, the shoes that were a phase, the jacket I'm still not over.",
       "I used to write about what I wore. Then life got busy, as it does, and the clothes kept happening without the words. So I'm starting again, and this time I'm writing it all down: the outfits, the dates they did or didn't survive, the pieces I keep going back to like a bad habit.",
+      "For the record, I'm something of a poster child for manifesting. Write it down, say it out loud, and then, of course, put in the work. Consider this journal me writing it down.",
       "Which got me thinking. Do we dress for the life we have, or for the one we're hoping walks through the door? Most mornings, I suspect it's a bit of both.",
       "Expect outfits, what's on my bathroom shelf, the fragrance I'm wearing that week, dinners worth dressing for, far too many shoes and the occasional confession. A new entry every Saturday. Tell me yours too."
     ],
@@ -137,7 +140,7 @@ function renderPosts(){
       });
       a.appendChild(g);
     }
-    const s=document.createElement("p"); s.className="sign"; s.textContent="x Samuel"; a.appendChild(s);
+    const s=document.createElement("p"); s.className="sign"; s.innerHTML='<span class="yours">Unbearably yours,</span><span class="sig">Samuel</span>'; a.appendChild(s);
     if(post.next){ const n=document.createElement("p"); n.className="next"; n.textContent=post.next; a.appendChild(n); }
     postsEl.appendChild(a);
   });
