@@ -29,8 +29,13 @@ h1{font-family:var(--display); font-weight:400; font-size:clamp(40px, 10vw, 78px
 h1 em{font-style:italic}
 .tagline{margin:0; color:var(--muted); max-width:42ch; font-size:15px}
 
-nav{display:flex; flex-wrap:wrap; justify-content:center; gap:4px 22px; margin-top:-28px}
-nav button{background:none; border:0; padding:6px 0; color:var(--muted); cursor:pointer; border-bottom:1px solid transparent}
+nav{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; display:flex; justify-content:safe center; gap:22px; margin-top:-28px; padding-block:12px; overflow-x:auto; scrollbar-width:none; background:var(--paper); border-bottom:1px solid var(--rule); box-shadow:0 0 0 100vmax var(--paper); clip-path:inset(0 -100vmax)}
+nav::-webkit-scrollbar{display:none}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:10; background:var(--paper)}
+.meta .strand{background:none; border:0; padding:0; font:inherit; letter-spacing:inherit; text-transform:inherit; cursor:pointer}
+.meta .strand:hover{text-decoration:underline; text-underline-offset:3px}
+article{scroll-margin-top:72px}
+nav button{flex:none; white-space:nowrap; background:none; border:0; padding:6px 0; color:var(--muted); cursor:pointer; border-bottom:1px solid transparent}
 nav button:hover{color:var(--ink)}
 nav button[aria-pressed="true"]{color:var(--ink); border-bottom-color:var(--ink)}
 nav button:focus-visible{outline:1px solid var(--accent); outline-offset:3px}
@@ -191,6 +196,13 @@ const POSTS = [
 
 let active = "all";
 const filtersEl = document.getElementById("filters");
+function pick(k){
+  active=k; renderFilters(); renderPosts();
+  const top = postsEl.getBoundingClientRect().top + window.scrollY - filtersEl.offsetHeight - 16;
+  if(window.scrollY > top) window.scrollTo({top, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+  const b=document.getElementById("f-"+k); if(b) b.scrollIntoView({block:"nearest", inline:"center"});
+}
+document.addEventListener("click", e=>{ const t=e.target.closest(".meta .strand"); if(t && STRANDS[t.dataset.k] && !STRANDS[t.dataset.k].hide) pick(t.dataset.k); });
 const postsEl = document.getElementById("posts");
 
 function renderFilters(){
@@ -200,7 +212,7 @@ function renderFilters(){
     const b = document.createElement("button");
     b.type="button"; b.id="f-"+k; b.textContent=label;
     b.setAttribute("aria-pressed", String(active===k));
-    b.addEventListener("click", ()=>{ active=k; renderFilters(); renderPosts(); });
+    b.addEventListener("click", ()=>pick(k));
     filtersEl.appendChild(b);
   });
 }
@@ -215,7 +227,7 @@ function renderPosts(){
   }
   list.forEach(post=>{
     const a = document.createElement("article"); a.id = post.id;
-    a.innerHTML = `<div class="meta"><span class="strand">${STRANDS[post.strand].name}</span><span>${post.date}</span></div><h2></h2>`;
+    a.innerHTML = `<div class="meta"><button type="button" class="strand" data-k="${post.strand}">${STRANDS[post.strand].name}</button><span>${post.date}</span></div><h2></h2>`;
     a.querySelector("h2").textContent = post.title;
     post.body.forEach(t=>{
       if(t.html){ const d=document.createElement("div"); d.innerHTML=t.html; a.appendChild(d.firstChild); return; }
