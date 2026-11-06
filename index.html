@@ -96,6 +96,8 @@ const STRANDS = {
   scent:   {name:"Fragrance", desc:"The scent I'm wearing this week, and the mood it puts me in."},
   wellness:{name:"Wellness", desc:"Moving, resting, and the small rituals that keep me sane."},
   dinners: {name:"Dinners", desc:"The tables worth dressing for, and who I was sat across from."},
+  out:     {name:"Out & About", desc:"The lobbies, windows and corners of London worth putting a good coat on for."},
+  welcome: {name:"Welcome", desc:"", hide:true},
   thoughts:{name:"Random Thoughts", desc:"A few things on my mind. Something I spotted, something I'm tempted by."}
 };
 
@@ -122,7 +124,7 @@ const POSTS = [
     ]
   },
   {
-    id:"and-so-it-starts", strand:"thoughts", date:"7 November 2026",
+    id:"and-so-it-starts", strand:"out", date:"7 November 2026",
     title:"And so it starts",
     body:[
           "And so it starts.",
@@ -174,7 +176,7 @@ const POSTS = [
     next:"Next Saturday: a love story. Of sorts. Tall, dark, and a year in the making."
   },
   {
-    id:"getting-dressed-again", strand:"thoughts", date:"6 November 2026",
+    id:"getting-dressed-again", strand:"welcome", date:"6 November 2026",
     title:"Can a man fall back in love with his wardrobe?",
     body:[
       "There's a particular kind of quiet that comes with being single in your thirties. Not lonely, exactly. More like a flat with very good lighting and a wardrobe that has started to read like a list of exes: the coat I bought for someone else's taste, the shoes that were a phase, the jacket I'm still not over.",
@@ -192,7 +194,7 @@ const filtersEl = document.getElementById("filters");
 const postsEl = document.getElementById("posts");
 
 function renderFilters(){
-  const opts = [["all","All"], ...Object.entries(STRANDS).map(([k,v])=>[k,v.name])];
+  const opts = [["all","All"], ...Object.entries(STRANDS).filter(([k,v])=>!v.hide).map(([k,v])=>[k,v.name])];
   filtersEl.innerHTML = "";
   opts.forEach(([k,label])=>{
     const b = document.createElement("button");
@@ -228,7 +230,7 @@ function renderPosts(){
     if(post.showStrands){
       const intro=document.createElement("p"); intro.textContent="Here's roughly how it'll go:"; a.appendChild(intro);
       const g=document.createElement("div"); g.className="strands";
-      Object.values(STRANDS).forEach(s=>{
+      Object.values(STRANDS).filter(s=>!s.hide).forEach(s=>{
         const d=document.createElement("div"); d.className="label";
         d.innerHTML=`<div class="tag">In the journal</div><strong></strong><span></span>`;
         d.querySelector("strong").textContent=s.name; d.querySelector("span").textContent=s.desc;
