@@ -97,11 +97,12 @@ const POSTS = [
       "The tree in the lobby is taller than most of my ambitions and better dressed than most men in Mayfair. Red velvet bows, a lot of gold, and a little wooden train parked among the presents like a chauffeur waiting outside the Ritz.",
       {img:"images/cafe-royal-tree.jpg", alt:"A towering Christmas tree with red velvet bows, gold lights and wrapped presents in the Café Royal lobby", caption:"Café Royal, London"},
       "Under the chandelier, a waterfall of crystal that frankly deserves its own security detail, sits a table that looks like the North Pole's post room. Trees built entirely from envelopes, each one sealed in red wax. Frosted firs. A vintage red truck. Two glittering bears who have clearly never worked a day in their lives. I respect them enormously.",
+      {img:"images/cafe-royal-chandelier.jpg", alt:"A huge crystal chandelier above a festive table, with a red Santa's Workshop counter behind", caption:"Under the chandelier"},
       "And in the middle, open for anyone to read: Santa's Naughty and Nice book.",
       "Naturally, I checked. I'm on neither list. Either I'm being saved for something special, or I'm simply too interesting to categorise. I've decided it's both.",
       {img:"images/cafe-royal-naughty-nice.jpg", alt:"Frosted mini trees, envelope trees sealed with red wax, a vintage red truck and an open Naughty and Nice book", caption:"The Naughty and Nice book"},
       "Behind it all, the Santa's Workshop counter glows red, and everyone sitting at it already has a glass in hand. As it should be.",
-      {img:"images/cafe-royal-chandelier.jpg", alt:"A huge crystal chandelier above a festive table, with a red Santa's Workshop counter behind", caption:"Under the chandelier"},
+      {img:"images/cafe-royal-santas-workshop.jpg", alt:"The red Santa's Workshop bar with a marble counter, champagne glasses, red lamps and a garland of lights", caption:"Santa's Workshop", w:1600, h:1200},
       "This is my favourite time of year to be unattached. The diary fills itself, every plus-one is my choice, and the best accessory at any party is a man who can leave exactly when he likes.",
       "December rewards effort. Polish the shoes. Wear the good coat. Smell expensive. Arrive as if you meant to.",
       "So here's my question for the season: why save the best version of yourself for a special occasion, when London in December <em>is</em> the occasion?",
@@ -154,7 +155,7 @@ function renderPosts(){
     post.body.forEach(t=>{
       if(typeof t === "string"){ const p=document.createElement("p"); p.innerHTML=t; a.appendChild(p); return; }
       const f=document.createElement("figure");
-      const im=document.createElement("img"); im.src=t.img; im.alt=t.alt; im.loading="lazy"; im.width=1050; im.height=1400;
+      const im=document.createElement("img"); im.src=t.img; im.alt=t.alt; im.loading="lazy"; im.width=t.w||1050; im.height=t.h||1400;
       f.appendChild(im);
       if(t.caption){ const c=document.createElement("figcaption"); c.textContent=t.caption; f.appendChild(c); }
       a.appendChild(f);
