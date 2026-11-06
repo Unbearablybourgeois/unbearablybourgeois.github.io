@@ -59,6 +59,17 @@ article + article{border-top:1px solid var(--rule); padding-top:56px}
 figure{margin:8px 0; display:flex; flex-direction:column; gap:8px}
 figure img{width:100%; height:auto; display:block; background:var(--card)}
 figcaption{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
+.edit{display:flex; flex-direction:column; gap:14px; border-top:1px solid var(--ink); padding-top:22px; margin-top:12px}
+.edit h3{font-family:var(--display); font-weight:400; font-size:28px; margin:0}
+.edit .tier{font-size:11px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--accent); margin:6px 0 0}
+.edit ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px}
+.edit li{border-bottom:1px solid var(--rule); padding-bottom:10px}
+.edit a{color:var(--ink); text-decoration-color:var(--rule); text-underline-offset:3px}
+.edit a:hover{text-decoration-color:var(--ink)}
+.edit .price{white-space:nowrap; color:var(--muted)}
+.edit .note{font-size:13px; color:var(--muted); font-style:italic}
+.ph{aspect-ratio:3/4; max-width:100%; border:1px dashed var(--rule); display:grid; place-items:center; color:var(--muted); font-size:11px; letter-spacing:.24em; text-transform:uppercase; text-align:center; padding:16px}
+article a{color:inherit}
 </style>
 <style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
 </head>
@@ -90,6 +101,27 @@ const STRANDS = {
 };
 
 const POSTS = [
+  {
+    id:"found-the-one", strand:"outfit", date:"14 November 2026",
+    title:"Found the One",
+    body:[
+      "Yes, I did.",
+      {ph:"Photo: Samuel in the coat"},
+      "Finding <em>the</em> coat gets harder with age, particularly if you were once, like me, a fully paid-up fashion victim. These days I&rsquo;ve made my peace with monotone. No logos on ready-to-wear; less really is more. I&rsquo;ll allow a little logo on a scarf, and I&rsquo;m still partial to one on a bag. The only logo I&rsquo;ll commit to on clothing is whatever Mrs Prada decides to put there, and we all know why.",
+      "Anyway. Back to the one.",
+      "It&rsquo;s been exactly a year since I started looking for the perfect coat. Not just any coat: <em>the navy coat.</em> Navy is my uniform and my comfort blanket. Most of my wardrobe comes in it. Very chic, I&rsquo;m told. Mostly by me.",
+      "I&rsquo;ve scouted every single week this year, even through that ghastly, endless heatwave. And just like dating, I almost committed a few times. Lovely coats, good on paper, but nothing felt right, and I refuse to settle. Settling is for sofas.",
+      "6.50pm on a Friday. Work done, I&rsquo;m edging towards the gym through the mob of Christmas-light worshippers who&rsquo;ve descended on Regent Street, when I think: let me pop into COS. There&rsquo;s a navy coat there I&rsquo;d already tried on and half convinced myself was The One. It had walked their runway, after all.",
+      "Upstairs in menswear, there it was. Still gorgeous. And yet, something was off. The spark had gone. I looked at it, it looked at me, and I said, kindly, <em>you are not the one for me.</em> I left it on the rail.",
+      "On my way out I thought: Liberty. Their menswear never disappoints, and some of my best pieces have come home from there. So in I went, wandering, praying for something that would speak to me. Something that said: <em>I&rsquo;m navy, I&rsquo;m yours, take me home.</em>",
+      "Then, in a split second, there he was. My darling boy. A beautiful raglan-sleeve coat by Oliver Spencer. A burst of happiness so sudden I could have wept, right there between the knitwear.",
+      {ph:"Photo: the back pleat"},
+      "I tried it on. Exactly what I wanted: an A-line cut with a pleat down the back that swings like a Victorian cloak, and enough room to layer the shit out of it all winter.",
+      "So here&rsquo;s my question: why do we keep almost-committing to things that are merely fine, when the one that makes us want to weep in Liberty is out there, waiting on a rail?",
+      "Did I make a decision? Yes.<br>Was it financially correct? Does Jesus have a middle name?",
+      {html:'<div class="edit"><h3>Navy, for every budget</h3><p>Not everyone&rsquo;s coat budget is a Liberty budget, nor should it be. Good taste has never been about the price tag. Here&rsquo;s how to find your own darling boy at every level.</p><p class="tier">Under £200</p><ul><li><a href="https://www.johnlewis.com/john-lewis-wool-rich-epsom-coat-navy/charcoal/p115252854" target="_blank" rel="noopener">John Lewis Wool Rich Epsom Coat</a> <span class="price">· £169</span><br><span class="note">A clean, grown-up overcoat that does the job beautifully.</span></li><li><a href="https://www.johnlewis.com/white-stuff-witham-wool-rich-overcoat-dark-navy/p115790685" target="_blank" rel="noopener">White Stuff Witham Wool Rich Overcoat</a> <span class="price">· £180</span><br><span class="note">A deeper navy, relaxed and easy to layer.</span></li><li><a href="https://www.johnlewis.com/john-lewis-double-breasted-wool-blend-overcoat-navy/p115612052" target="_blank" rel="noopener">John Lewis Double Breasted Wool Blend Overcoat</a> <span class="price">· £199</span><br><span class="note">For when you want a little more drama.</span></li></ul><p class="tier">Under £300</p><ul><li><a href="https://www.charlestyrwhitt.com/uk/pure-wool-overcoat---navy/OUF0068NAV.html" target="_blank" rel="noopener">Charles Tyrwhitt Pure Wool Overcoat</a> <span class="price">· £299</span><br><span class="note">100% merino at this price is a proper find.</span></li></ul><p class="tier">The investment</p><ul><li><a href="https://uk.sandro-paris.com/en/p/wool-broadcloth-coat/SHPMA00391_211.html" target="_blank" rel="noopener">Sandro Straight-Fit Wool-Blend Coat</a> <span class="price">· £639</span><br><span class="note">Parisian, sharp, and made to last.</span></li></ul><p class="note">Prices at the time of writing.</p></div>'}
+    ]
+  },
   {
     id:"and-so-it-starts", strand:"thoughts", date:"7 November 2026",
     title:"And so it starts",
@@ -155,6 +187,8 @@ function renderPosts(){
     a.innerHTML = `<div class="meta"><span class="strand">${STRANDS[post.strand].name}</span><span>${post.date}</span></div><h2></h2>`;
     a.querySelector("h2").textContent = post.title;
     post.body.forEach(t=>{
+      if(t.html){ const d=document.createElement("div"); d.innerHTML=t.html; a.appendChild(d.firstChild); return; }
+      if(t.ph){ const d=document.createElement("div"); d.className="ph"; d.textContent=t.ph; a.appendChild(d); return; }
       if(typeof t === "string"){ const p=document.createElement("p"); p.innerHTML=t; a.appendChild(p); return; }
       const f=document.createElement("figure");
       const im=document.createElement("img"); im.src=t.img; im.alt=t.alt; im.loading="lazy"; im.width=t.w||1050; im.height=t.h||1400;
