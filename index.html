@@ -58,6 +58,8 @@ article > p.dc::first-letter{font-family:var(--display); float:left; font-size:3
 
 .next{font-family:var(--display); font-style:italic; color:var(--muted); font-size:19px}
 .empty{color:var(--muted); font-family:var(--display); font-style:italic; font-size:19px; text-align:center}
+.subscribe{font-family:var(--body); font-weight:500; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:3px}
+.subscribe:hover{color:var(--accent); border-color:var(--accent)}
 footer{border-top:1px solid var(--rule); padding-top:22px; color:var(--muted); text-align:center; font-size:10px}
 main{display:flex; flex-direction:column; gap:64px}
 article + article{border-top:1px solid var(--rule); padding-top:56px}
@@ -85,13 +87,14 @@ article a{color:inherit}
   <header>
     <h1>Unbearably <em>Bourgeois</em></h1>
     <p class="tagline">Daydreamer, taking getting dressed far too seriously.</p>
+    <a class="subscribe" href="https://unbearablybourgeois.substack.com">Subscribe on Substack</a>
   </header>
 
   <nav aria-label="Filter posts" id="filters"></nav>
 
   <main id="posts"></main>
 
-  <footer>© 2026 Samuel · New posts every Saturday</footer>
+  <footer>© 2026 Samuel · New posts every Saturday · <a href="https://unbearablybourgeois.substack.com" style="color:inherit">Also on Substack</a></footer>
 </div>
 
 <script>
@@ -114,40 +117,41 @@ const POSTS = [
     body:[
           "I was stopped three times this week.",
       "Not for my number. Although, for the record, it&rsquo;s available.",
-      "The first was at the Brown&rsquo;s Hotel Christmas party. On a school night, no less, because nothing says &lsquo;I have my life together&rsquo; like caviar midweek. A woman leaned in, mid caviar bump, close enough to be indiscreet. &ldquo;What <em>is</em> that?&rdquo; she whispered. I told her it was confidential. It isn&rsquo;t. I just enjoyed the drama.",
+      "The first was at the Brown&rsquo;s Hotel Christmas party. On a school night, no less, because nothing says &lsquo;I have my life together&rsquo; like caviar midweek. A woman leaned in mid caviar bump, a little closer than was strictly necessary. &ldquo;What <em>is</em> that?&rdquo; she whispered. I told her it was confidential. It isn&rsquo;t. I just enjoyed the drama.",
       "The second was at the gym reception. A friendly hug that lasted one beat longer than friendly. We&rsquo;ll get to him another time.",
       "The third was on Jermyn Street. A stranger in very good shoes stopped me mid-stride. &ldquo;Sorry, but what are you wearing?&rdquo; I smiled, said thank you, and kept walking. Some things are better left to the imagination.",
-      "Three people. Three scents. Not one of them asked about my outfit, which was, of course, impeccable.",
-      "Here&rsquo;s the thing about scent. It arrives before you do, and it stays long after you&rsquo;ve gone. It&rsquo;s the most intimate thing you&rsquo;ll ever wear in public.",
-      "In winter, when every man in London is wrapped in the same dark wool, it&rsquo;s the only way to stand out without saying a word.",
+      "Three people, three different scents, and not one of them asked about my outfit. Which, for the record, was impeccable.",
+      "Scent gets there before you do and hangs around long after you&rsquo;ve left. It&rsquo;s the most intimate thing you&rsquo;ll ever wear in public.",
+      "In winter, when every man in London is wrapped in the same dark wool, it&rsquo;s the only way to stand out without opening your mouth.",
       "So I&rsquo;ll tell you everything. Four bottles, one secret weapon, and the one nobody ever guesses.",
       "Just keep it between us.",
-              "Here is my winter cast. Five characters. Each with a role. Each with a reputation.",
+              {img:"images/winter-cast-illustration.jpg", alt:"Gouache and ink illustration of a marble tray of perfume bottles with a smoking gold bukhoor burner", caption:"The winter cast", w:1122, h:1402},
+          "Here&rsquo;s my winter cast. Five characters, and every one of them has a reputation.",
           "<strong>The Seducer: Dolce &amp; Gabbana Velvet Desert Oud</strong>",
-          "Tobacco and incense first, then saffron, amber and leather, then oud. Smoky, warm and slightly dangerous. This is the one I wear when the lighting is low and the plans are loose. It doesn&rsquo;t enter a room. It takes the room hostage.",
+          "Tobacco and incense first, then saffron, amber and leather, then oud. Smoky, warm and slightly dangerous. I wear it when the lighting is low and the plans are loose. It doesn&rsquo;t walk into a room, it takes the room hostage.",
           "If anyone ever leans in a little too long, this is why.",
           "But he&rsquo;s not the most dangerous one in the cast.",
           "<strong>The Insider: Byredo Suede Osmanthus</strong>",
           "You can&rsquo;t buy this one just anywhere. It lives at Harrods and nowhere else, which suits its personality perfectly.",
-          "Peach and magnolia, sitting on suede, oud and labdanum. It speaks softly. It never raises its voice. And it always, always gets the table.",
+          "Peach and magnolia, sitting on suede, oud and labdanum. Quiet, never shouty, and somehow it always gets the table.",
           "Wear it when you want people to wonder where you&rsquo;ve been.",
           "<strong>The Showman: Diptyque Lazulio</strong>",
           "It opens with rhubarb.",
           "I know. I KNOW. Stay with me.",
-          "Tangy and green, then rose, then a slow, golden warmth of benzoin and vetiver. On paper it makes no sense. On skin it&rsquo;s pure theatre, the scent of the moment the house lights dim and the curtain starts to rise.",
+          "Tangy and green, then rose, then this slow golden warmth of benzoin and vetiver. On paper it makes no sense. On skin it&rsquo;s pure theatre, like that moment the house lights go down and the curtain starts to rise.",
           "Nobody guesses what it is. That&rsquo;s the point.",
           "<strong>The Gentleman: Clive Christian Town &amp; Country</strong>",
           "Bergamot, sage and juniper. Then frankincense and cardamom. Then cedar, cashmere and ambergris.",
-          "It&rsquo;s as comfortable at a Mayfair lunch as it is in a country pub with muddy boots by the fire. Impeccable manners. Never overdressed. Never underestimated.",
+          "It&rsquo;s as happy at a Mayfair lunch as it is in a country pub with muddy boots by the fire. Lovely manners, never overdressed, and never to be underestimated.",
           "Every man should own one scent like this. Most don&rsquo;t.",
           "And then there&rsquo;s the one that isn&rsquo;t in a bottle at all.",
           "<strong>The Almighty: Bukhoor</strong>",
           "Wood chips soaked in oils and resins, set on hot charcoal, left to smoulder.",
-          "The smoke rises, slow and heavy, and finds its way into everything: the coats on the rail, the cushions on the sofa, the collar of the jumper you&rsquo;ll wear tomorrow. Guests walk in and stop mid-sentence. Every single time.",
-          "It&rsquo;s not a fragrance. It&rsquo;s an arrival. It&rsquo;s what home smells like when home is trying to impress you.",
-          "So here&rsquo;s my question for you: if your outfit is the first thing people notice, why is your scent so often an afterthought?",
-          "Find your cast. Wear them like you mean it.",
-      "And no, you don&rsquo;t need a Harrods budget to do it. Not everyone has one, and nobody should have to. Your cast doesn&rsquo;t need to be expensive. It just needs to be <em>yours</em>. Spray a few at a counter, walk away, and see which one is still with you at dinner. That&rsquo;s the one.",
+          "The smoke rises slow and heavy and gets into everything. The coats on the rail, the cushions on the sofa, the collar of the jumper you&rsquo;ll wear tomorrow. Guests walk in and stop mid-sentence, every single time.",
+          "It&rsquo;s not really a fragrance, it&rsquo;s an arrival. It&rsquo;s what home smells like when home is trying to impress you.",
+          "If your outfit is the first thing people notice, why is your scent so often an afterthought?",
+          "Find your cast and wear them like you mean it.",
+      "And no, you don&rsquo;t need a Harrods budget to do it. Not everyone has one, and nobody should have to. Your cast doesn&rsquo;t need to be expensive, it just needs to be <em>yours</em>. Spray a few at a counter, walk away, and see which one is still with you at dinner. That&rsquo;s the one.",
           "And never, ever trust a man with a boring nose."
     ]
   },
